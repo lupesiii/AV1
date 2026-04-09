@@ -6,14 +6,15 @@ import { authService } from "../../service/authService.js";
 import { FuncionarioService } from "../../service/funcionarioService.js";
 import type { Question } from "../../service/question.js";
 import type { Context } from "../../types/context.js";
+import { rl } from "../index.js";
 
-export async function cadastroFuncionario(context: Context, rl: Question) {
+export async function cadastroFuncionario(context: Context) {
     console.clear()
 
     const fRepo = new FuncionarioRepository()
     const fService = new FuncionarioService(fRepo)
 
-    if (!context.funcionario || !rl) {
+    if (!context.funcionario) {
         console.log("Falha critica")
         process.exit(1)
     }

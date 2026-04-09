@@ -8,4 +8,8 @@ export class Question {
             this.rl.question(pergunta, resposta => resolve(resposta) )
         })
     }
+
+    public fechar() {
+        this.rl.close()
+    }
 }
