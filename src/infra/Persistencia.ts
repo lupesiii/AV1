@@ -1,7 +1,8 @@
 import { existsSync, type PathLike } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { Persistivel } from "./Persistivel.js";
 
-export class Persistencia {
+export class Persistencia<T> extends Persistivel<T> {
 	public async verificarPasta(path: PathLike) {
 		try {
 			await mkdir(path, { recursive: true });

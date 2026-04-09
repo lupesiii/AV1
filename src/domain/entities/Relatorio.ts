@@ -2,7 +2,7 @@ import path from "node:path";
 import { Aeronave } from "./Aeronave.js";
 import { Persistencia } from "./Persistencia.js";
 
-export class Relatorio extends Persistencia{
+export class Relatorio extends Persistencia<Relatorio> {
 	public aeronave: Aeronave
 
 	constructor(aeronave: Aeronave) {

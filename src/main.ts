@@ -2,108 +2,19 @@ import { existsSync, type PathLike } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { createInterface } from "node:readline/promises";
-import { Etapa } from "./entidades/Etapa.js";
-import { Funcionario } from "./entidades/Funcionario.js";
-import { Persistencia } from "./entidades/Persistencia.js";
-import { Teste } from "./entidades/Teste.js";
-import { Areas } from "./types/Areas.js";
-import { NivelPermissao } from "./types/NivelPermissao.js";
-import { Persistivel } from "./entidades/Persistivel.js";
+import { Etapa } from "./entities/Etapa.js";
+import { Funcionario } from "./entities/Funcionario.js";
+import { Persistencia } from "./entities/Persistencia.js";
+import { Teste } from "./entities/Teste.js";
+import { Areas } from "./domain/enuns/Areas.js";
+import { NivelPermissao } from "./domain/enuns/NivelPermissao.js";
+import { Persistivel } from "./entities/Persistivel.js";
 
 async function main() {
-	const rl = createInterface({ input: process.stdin, output: process.stdout });
-	const func = new Funcionario(
-		"Lucas",
-		"12981438361",
-		"Vila Industrial",
-		"lupesi",
-		"1",
-		NivelPermissao.Administrador,
-	);
 
 	let funcionarioAtual: Funcionario | null = null;
 
 	while (!funcionarioAtual) funcionarioAtual = await login();
-
-	function verificaPermissao(funcionario: Funcionario, areaFuncao: Areas) {
-		if (funcionario.nivelPermissao === NivelPermissao.Administrador)
-			return true;
-
-		if (areaFuncao === Areas.Teste || areaFuncao === Areas.Etapa) {
-			if (funcionario.nivelPermissao === NivelPermissao.Operador) return false;
-			return true;
-		}
-
-		return false;
-	}
-
-	async function cadastro<T>(pathFile: PathLike, classe:T) {
-		console.clear();
-
-		if (!funcionarioAtual) {
-			console.error("SEM CADASTRO");
-			process.exit(1);
-		}
-
-		const permissaoValida = verificaPermissao(
-			funcionarioAtual,
-			Areas.Funcionario,
-		);
-
-		if (!permissaoValida) {
-			console.error("Você não possui permissão");
-			return;
-		}
-
-
-		if (existsSync(pathFile)) {
-			console.clear();
-			console.log("Usuário já cadastrado");
-			return;
-		}
-		
-		if (classe instanceof Persistivel){
-			await classe.salvar()
-		}
-
-		// await newFuncionario.salvar();
-	}
-
-	async function cadastroFuncionario(){
-		const userNome = await rl.question("Digite o nome: ");
-		const userTelefone = await rl.question("Digite o telefone: ");
-		const userEndereco = await rl.question("Digite o endereco: ");
-		const userName = await rl.question("Digite o usuário: ");
-		const userSenha = await rl.question("Digite a senha: ");
-
-		let userNivel: NivelPermissao | null = null;
-		while (userNivel === null) {
-			console.clear();
-			const answer = await rl.question(
-				"Qual o nivel de acesso\n1-ADMIN\n2-Engenheiro\n3-Operador\n",
-			);
-
-			switch (Number(answer)) {
-				case 1:
-					userNivel = NivelPermissao.Administrador;
-					break;
-
-				case 2:
-					userNivel = NivelPermissao.Engenheiro;
-					break;
-
-				case 3:
-					userNivel = NivelPermissao.Operador;
-					break;
-
-				default:
-					console.log("Inválido");
-					break;
-			}
-		}
-	}
-
-	async function cadastroAeronave(){}
 
 	async function login() {
 		const userName = await rl.question("Digite o usuário: ");
@@ -146,6 +57,12 @@ async function main() {
 		return null;
 	}
 
+
+
+
+
+	async function cadastroAeronave(){}
+
 	async function funcionarioOpts() {
 		const options = `-------- Funcionario --------\n
 1 - Cadastrar funcionário\n
@@ -155,7 +72,7 @@ async function main() {
 
 		let optAnswer: number | null = null;
 		while (optAnswer !== 0) {
-			console.clear();
+			// console.clear();
 			optAnswer = Number(await rl.question(options));
 			switch (optAnswer) {
 				case 1:

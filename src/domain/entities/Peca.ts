@@ -1,9 +1,9 @@
 import path from "node:path";
-import type { StatusPeca } from "../types/StatusPeca.js";
-import type { TipoPeca } from "../types/TipoPeca.js";
+import type { StatusPeca } from "../domain/enuns/StatusPeca.js";
+import type { TipoPeca } from "../domain/enuns/TipoPeca.js";
 import { Persistencia } from "./Persistencia.js";
 
-export class Peca extends Persistencia {
+export class Peca extends Persistencia<Peca> {
 	public nome: string;
 	public tipo: TipoPeca;
 	public fornecedor: string;

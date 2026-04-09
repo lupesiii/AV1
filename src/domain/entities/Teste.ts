@@ -1,9 +1,9 @@
 import path from "node:path";
-import type { ResultadoTeste } from "../types/ResultadoTeste.js";
-import type { TipoTeste } from "../types/TipoTeste.js";
+import type { ResultadoTeste } from "../domain/enuns/ResultadoTeste.js";
+import type { TipoTeste } from "../domain/enuns/TipoTeste.js";
 import { Persistencia } from "./Persistencia.js";
 
-export class Teste extends Persistencia {
+export class Teste extends Persistencia<Teste> {
 	public tipo: TipoTeste;
 	public resultado: ResultadoTeste;
 	constructor(tipo: TipoTeste, resultado: ResultadoTeste) {

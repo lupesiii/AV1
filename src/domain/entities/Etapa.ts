@@ -1,4 +1,4 @@
-import { StatusEtapa } from "../types/StatusEtapa.js";
+import { StatusEtapa } from "../domain/enuns/StatusEtapa.js";
 import type { Funcionario } from "./Funcionario.js";
 
 export class Etapa {

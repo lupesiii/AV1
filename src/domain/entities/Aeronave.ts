@@ -1,12 +1,12 @@
 import path from "node:path";
-import type { TipoAeronave } from "../types/TipoAeronave.js";
+import type { TipoAeronave } from "../domain/enuns/TipoAeronave.js";
 import type { Etapa } from "./Etapa.js";
 import type { Peca } from "./Peca.js";
 import { Persistencia } from "./Persistencia.js";
 import { Relatorio } from "./Relatorio.js";
 import type { Teste } from "./Teste.js";
 
-export class Aeronave extends Persistencia {
+export class Aeronave extends Persistencia<Aeronave> {
 	public codigo: string;
 	public modelo: string;
 	public tipo: TipoAeronave;

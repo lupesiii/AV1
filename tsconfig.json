@@ -12,7 +12,6 @@
       "es2024",
       "ESNext.Array",
       "ESNext.Collection",
-      "ESNext.Error",
       "ESNext.Iterator",
       "ESNext.Promise"
     ],
