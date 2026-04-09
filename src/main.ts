@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, type PathLike } from "node:fs";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { createInterface } from "node:readline/promises";
@@ -8,6 +8,7 @@ import { Persistencia } from "./entidades/Persistencia.js";
 import { Teste } from "./entidades/Teste.js";
 import { Areas } from "./types/Areas.js";
 import { NivelPermissao } from "./types/NivelPermissao.js";
+import { Persistivel } from "./entidades/Persistivel.js";
 
 async function main() {
 	const rl = createInterface({ input: process.stdin, output: process.stdout });
@@ -36,7 +37,7 @@ async function main() {
 		return false;
 	}
 
-	async function cadastro() {
+	async function cadastro<T>(pathFile: PathLike, classe:T) {
 		console.clear();
 
 		if (!funcionarioAtual) {
@@ -54,6 +55,21 @@ async function main() {
 			return;
 		}
 
+
+		if (existsSync(pathFile)) {
+			console.clear();
+			console.log("Usuário já cadastrado");
+			return;
+		}
+		
+		if (classe instanceof Persistivel){
+			await classe.salvar()
+		}
+
+		// await newFuncionario.salvar();
+	}
+
+	async function cadastroFuncionario(){
 		const userNome = await rl.question("Digite o nome: ");
 		const userTelefone = await rl.question("Digite o telefone: ");
 		const userEndereco = await rl.question("Digite o endereco: ");
@@ -85,27 +101,9 @@ async function main() {
 					break;
 			}
 		}
-
-		const fileName = `${userName.toLowerCase()}.json`;
-		const pathFile = path.join("dados", "funcionario", fileName);
-
-		if (existsSync(pathFile)) {
-			console.clear();
-			console.log("Usuário já cadastrado");
-			return;
-		}
-
-		const newFuncionario = new Funcionario(
-			userNome,
-			userTelefone,
-			userEndereco,
-			userName,
-			userSenha,
-			NivelPermissao.Operador,
-		);
-
-		await newFuncionario.salvar();
 	}
+
+	async function cadastroAeronave(){}
 
 	async function login() {
 		const userName = await rl.question("Digite o usuário: ");
@@ -161,7 +159,7 @@ async function main() {
 			optAnswer = Number(await rl.question(options));
 			switch (optAnswer) {
 				case 1:
-					await cadastro();
+					await cadastroFuncionario();
 					break;
 
 				case 2: {
@@ -183,7 +181,15 @@ async function main() {
 						NivelPermissao.Operador,
 					);
 
-					funcionarioCarregado = await funcionarioCarregado.carregar();
+					const dados = await funcionarioCarregado.carregar();
+
+					if (!(dados instanceof Funcionario)) {
+						console.log("ERRO ARQUIVO NÃO ENCONTRADO")
+						funcionarioOpts()
+						break
+					}
+
+					funcionarioCarregado = dados
 
 					if (funcionarioCarregado.senha !== userSenha) {
 						console.log("Senha incorreta do funcionario");
@@ -212,7 +218,16 @@ async function main() {
 2 - Carregar aeronave\n
 ----------------------------\n\n`;
 
-		const optAnswer = rl.question(options);
+		let optAnswer: number | null = null;
+		
+		while(optAnswer !== 0){
+			optAnswer = Number(rl.question(options))
+
+			switch(optAnswer) {
+				case 1:
+
+			}
+		}
 	}
 
 	async function etapaOpts() {

@@ -23,13 +23,13 @@ export class Persistencia {
 		}
 	}
 
-	public async leJson(pathFile: PathLike) {
+	public async leJson<T>(pathFile: PathLike) {
 		if (!existsSync(pathFile)) {
 			console.log("Arquivo não encontrado");
 			return null;
 		}
 
-		const dados = JSON.parse(await readFile(pathFile, { encoding: "utf-8" }));
+		const dados: T = JSON.parse(await readFile(pathFile, { encoding: "utf-8" }));
 
 		return dados;
 	}

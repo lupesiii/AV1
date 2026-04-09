@@ -2,8 +2,9 @@ import { randomUUID } from "node:crypto";
 import path from "node:path";
 import type { NivelPermissao } from "../types/NivelPermissao.js";
 import { Persistencia } from "./Persistencia.js";
+import type { IPersistivel } from "../types/IPersistivel.js";
 
-export class Funcionario extends Persistencia {
+export class Funcionario extends Persistencia implements IPersistivel{
 	public id: string;
 	public nome: string;
 	public telefone: string;
@@ -50,26 +51,21 @@ export class Funcionario extends Persistencia {
 		await this.criarJson(pathFile, fileName, dados);
 	}
 
-	public async carregar() {
+	public async carregar<Funcionario>() {
 		const fileName = `${this.usuario.toLowerCase()}.json`;
 		const pathFile = path.join("dados", "funcionario", fileName);
 
-		const {
-			nome,
-			telefone,
-			endereco,
-			usuario,
-			senha,
-			nivelPermissao,
-		}: Funcionario = await this.leJson(pathFile);
+		const dados: Funcionario | null = await this.leJson<Funcionario>(pathFile);
+
+		if (dados === null) return null
 
 		const funcionarioCarregado = new Funcionario(
-			nome,
-			telefone,
-			endereco,
-			usuario,
-			senha,
-			nivelPermissao,
+			dados.nome,
+			dados.telefone,
+			dados.endereco,
+			dados.usuario,
+			dados.senha,
+			dados.nivelPermissao,
 		);
 
 		return funcionarioCarregado;
