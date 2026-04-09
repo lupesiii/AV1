@@ -1,0 +1,19 @@
+{
+  "name": "av1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc && node ./dist/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^25.5.2"
+  },
+  "dependencies": {
+    "typescript": "^6.0.2"
+  }
+}
