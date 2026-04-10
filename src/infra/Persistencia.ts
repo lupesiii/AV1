@@ -1,8 +1,8 @@
 import { existsSync, type PathLike } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { Persistivel } from "./Persistivel.js";
+import type { Persistivel } from "./Persistivel.js";
 
-export class Persistencia<T> extends Persistivel<T> {
+export class Persistencia<T> implements Persistivel<T> {
 	public async verificarPasta(path: PathLike) {
 		try {
 			await mkdir(path, { recursive: true });
@@ -30,8 +30,18 @@ export class Persistencia<T> extends Persistivel<T> {
 			return null;
 		}
 
-		const dados: T = JSON.parse(await readFile(pathFile, { encoding: "utf-8" }));
+		const dados: T = JSON.parse(
+			await readFile(pathFile, { encoding: "utf-8" }),
+		);
 
 		return dados;
+	}
+
+	public salvar(_classe: T): Promise<void> {
+		throw new Error();
+	}
+
+	public carregar(_id: string): Promise<T | null> {
+		throw new Error();
 	}
 }

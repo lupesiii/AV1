@@ -1,12 +1,10 @@
-import path from "node:path";
-import type { TipoAeronave } from "../domain/enuns/TipoAeronave.js";
+import type { TipoAeronave } from "../enuns/TipoAeronave.js";
 import type { Etapa } from "./Etapa.js";
 import type { Peca } from "./Peca.js";
-import { Persistencia } from "./Persistencia.js";
 import { Relatorio } from "./Relatorio.js";
 import type { Teste } from "./Teste.js";
 
-export class Aeronave extends Persistencia<Aeronave> {
+export class Aeronave {
 	public codigo: string;
 	public modelo: string;
 	public tipo: TipoAeronave;
@@ -25,7 +23,6 @@ export class Aeronave extends Persistencia<Aeronave> {
 		capacidade: number,
 		alcance: number,
 	) {
-		super();
 		this.codigo = codigo;
 		this.modelo = modelo;
 		this.tipo = tipo;
@@ -37,18 +34,12 @@ export class Aeronave extends Persistencia<Aeronave> {
 		this.relatorio = new Relatorio(this);
 	}
 
-	public async salvar() {
-		const fileName = `${this.codigo}-${this.modelo}.json`;
-		const pathFile = path.join("dados", "aeronave");
-
-		const dados = {
-			codigo: this.codigo,
-			modelo: this.modelo,
-			tipo: this.tipo,
-			capacidade: this.capacidade,
-			alcance: this.alcance,
-		};
-
-		await this.criarJson(pathFile, fileName, dados);
+	public detalhes() {
+		console.log("===== AERONAVE =====");
+		console.log("Código:", this.codigo);
+		console.log("Modelo:", this.modelo);
+		console.log("Tipo:", this.tipo);
+		console.log("Capacidade:", this.capacidade);
+		console.log("Alcance:", this.alcance);
 	}
 }

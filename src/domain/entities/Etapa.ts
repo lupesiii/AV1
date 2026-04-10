@@ -1,4 +1,4 @@
-import { StatusEtapa } from "../domain/enuns/StatusEtapa.js";
+import { StatusEtapa } from "../enuns/StatusEtapa.js";
 import type { Funcionario } from "./Funcionario.js";
 
 export class Etapa {
@@ -7,11 +7,11 @@ export class Etapa {
 	public status: StatusEtapa;
 	public funcionarios: Funcionario[];
 
-	constructor(nome: string, prazo: string, funcionarios: Funcionario[]) {
+	constructor(nome: string, prazo: string) {
 		this.nome = nome;
 		this.prazo = prazo;
 		this.status = StatusEtapa.Pendente;
-		this.funcionarios = funcionarios;
+		this.funcionarios = [];
 	}
 
 	public iniciar() {

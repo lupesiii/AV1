@@ -1,0 +1,45 @@
+{
+  "Aeronave": "AER-001",
+  "Modelo": "F-22 Raptor",
+  "Tipo": "MILITAR",
+  "Capacidade": 1,
+  "Alcance": 2960,
+  "Pecas": [
+    {
+      "Nome": "carro",
+      "Tipo": "IMPORTADA",
+      "Fornecedor": "",
+      "Status": "EM_PRODUCAO"
+    },
+    {
+      "Nome": "Turbina",
+      "Tipo": "IMPORTADA",
+      "Fornecedor": "LUcas",
+      "Status": "PRONTA"
+    }
+  ],
+  "Etapas": [
+    {
+      "Etapa": "e1",
+      "Prazo": "1",
+      "Status": "CONCLUIDA"
+    },
+    {
+      "Etapa": "e2",
+      "Prazo": "e2",
+      "Status": "PENDENTE"
+    }
+  ],
+  "Testes": [
+    {
+      "ID": "P003",
+      "Tipo": "AERODINAMICO",
+      "Resultado": "APROVADO"
+    },
+    {
+      "ID": "T001",
+      "Tipo": "HIDRAULICO",
+      "Resultado": "REPROVADO"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "nome": "Carlos Silva",
+  "telefone": "11999999999",
+  "endereco": "Rua A, 123",
+  "usuario": "carlos.admin",
+  "senha": "123",
+  "nivelPermissao": "ADMINISTRADOR"
+}
