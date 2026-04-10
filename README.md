@@ -1,15 +1,22 @@
+# Executar projeto
+
+O projeto já vem com algumas arquivos pré-prontos. Para adiciona-los, com o projeto executando selecione a opção referente ao objeto/arquivo e depois selecione carregar e por ultimo o nome do arquivo
+
+## Requisitos
+
+- Node 24.1.0
+- Typescript
+
+## Comandos
+
+- npm i
+- npm run dev
+
 # 🧱 Arquitetura do Projeto CLI com POO (TypeScript)
 
 ## 📌 Visão Geral
 
 Este projeto segue uma arquitetura em camadas para aplicações CLI utilizando **Programação Orientada a Objetos (POO)** com TypeScript.
-
-O objetivo é garantir:
-
-* Separação de responsabilidades
-* Código escalável
-* Facilidade de manutenção
-* Baixo acoplamento entre camadas
 
 ---
 
@@ -34,7 +41,6 @@ src/
 │
 ├── utils/              # Funções utilitárias
 │
-├── config/             # Configurações do projeto
 │
 └── types/              # Tipos globais
 ```
@@ -51,15 +57,15 @@ Responsável pela interação com o usuário.
 
 **Responsabilidades:**
 
-* Ler entrada do usuário (`readline`, prompts)
-* Exibir mensagens (`console.log`)
-* Chamar os services
+- Ler entrada do usuário (`readline`, prompts)
+- Exibir mensagens (`console.log`)
+- Chamar os services
 
 **Não deve:**
 
-* Conter regras de negócio
-* Acessar arquivos diretamente
-* Criar entidades complexas
+- Conter regras de negócio
+- Acessar arquivos diretamente
+- Criar entidades complexas
 
 **Exemplo:**
 
@@ -75,18 +81,18 @@ Representa o núcleo do sistema.
 
 **Contém:**
 
-* Entidades (ex: `Funcionario`)
-* Interfaces (ex: `IPersistivel`)
-* Enums (ex: `NivelPermissao`)
+- Entidades (ex: `Funcionario`)
+- Interfaces (ex: `IPersistivel`)
+- Enums (ex: `NivelPermissao`)
 
 **Responsabilidades:**
 
-* Regras de negócio
-* Comportamento das entidades
+- Regras de negócio
+- Comportamento das entidades
 
 **Não deve:**
 
-* Depender de `fs`, `path`, banco de dados ou CLI
+- Depender de `fs`, `path`, banco de dados ou CLI
 
 ---
 
@@ -96,10 +102,10 @@ Orquestram o fluxo da aplicação.
 
 **Responsabilidades:**
 
-* Receber dados do CLI
-* Criar entidades
-* Chamar repositórios
-* Aplicar regras de aplicação
+- Receber dados do CLI
+- Criar entidades
+- Chamar repositórios
+- Aplicar regras de aplicação
 
 **Exemplo:**
 
@@ -120,14 +126,14 @@ Responsável pelo acesso a dados.
 
 **Contém:**
 
-* Repositórios
-* Persistência em JSON (ou banco futuramente)
+- Repositórios
+- Persistência em JSON (ou banco futuramente)
 
 **Responsabilidades:**
 
-* Salvar dados
-* Ler dados
-* Gerenciar arquivos/pastas
+- Salvar dados
+- Ler dados
+- Gerenciar arquivos/pastas
 
 ---
 
@@ -155,33 +161,11 @@ CLI → Service → Domain → Infra
 
 ---
 
-## ⚠️ Boas Práticas
-
-### ❌ Evitar
-
-* Entidades acessando arquivos (`fs`)
-* CLI contendo lógica de negócio
-* Métodos genéricos desnecessários (`<T>` mal utilizado)
-
----
-
-## 🔧 Evolução do Projeto
-
-Essa arquitetura permite evoluir facilmente:
-
-* 🔄 Trocar JSON por banco de dados
-* 🌐 Adaptar CLI para API REST
-* 🧪 Adicionar testes unitários
-* 🔐 Implementar autenticação robusta
-
----
-
 ## 📌 Conclusão
 
 Essa arquitetura garante que o sistema seja:
 
-* Organizado
-* Escalável
-* Fácil de manter
-* Preparado para crescimento
-
+- Organizado
+- Escalável
+- Fácil de manter
+- Preparado para crescimento
