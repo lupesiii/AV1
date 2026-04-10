@@ -10,6 +10,7 @@ export async function aeronaveOpts(context: Context) {
 2 - Carregar aeronave\n
 3 - Detalhes\n
 0 - Voltar\n
+EASTER-EGG = LUPESI\n
 ----------------------------\n\n`;
 
 	let optAnswer: number | null = null;
