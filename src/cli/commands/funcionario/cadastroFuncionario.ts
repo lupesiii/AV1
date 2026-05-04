@@ -77,6 +77,7 @@ export async function cadastroFuncionario(context: Context) {
 		console.log("Cadastro bem sucedido...");
 		await delay(2000);
 	} catch (err) {
-		console.error(err);
+		console.log("Cadastro falhou", err);
+		await delay(2000);
 	}
 }

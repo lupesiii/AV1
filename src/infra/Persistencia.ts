@@ -12,6 +12,10 @@ export class Persistencia<T> implements Persistivel<T> {
 	}
 
 	public async criarJson(pathFile: PathLike, fileName: string, dados: object) {
+		if (existsSync(pathFile)) {
+			throw "Arquivo já existe";
+		}
+
 		try {
 			await this.verificarPasta(pathFile);
 			await writeFile(
